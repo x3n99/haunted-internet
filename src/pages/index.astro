@@ -1,16 +1,77 @@
 ---
+import "../styles/global.css";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#08090b" />
+    <title>HAUNTED://NET — Archive Node 07</title>
+    <meta
+      name="description"
+      content="A corrupted archive recovered from an unknown network."
+    />
+  </head>
+
+  <body>
+    <main class="boot-screen" id="bootScreen">
+      <div class="scanlines" aria-hidden="true"></div>
+      <div class="screen-noise" aria-hidden="true"></div>
+
+      <div class="boot-content" id="bootContent">
+        <header class="system-header">
+          <span>HAUNTED://NET</span>
+          <span class="system-version">NODE 07 / SYS.1999</span>
+        </header>
+
+        <div class="boot-mark" aria-hidden="true">
+          <span class="boot-mark-inner"></span>
+        </div>
+
+        <div class="boot-log" id="bootLog" aria-live="polite"></div>
+
+        <div class="progress-section">
+          <div class="progress-label">
+            <span id="progressText">INITIALIZING SYSTEM</span>
+            <span id="progressPercent">00%</span>
+          </div>
+
+          <div
+            class="progress-track"
+            role="progressbar"
+            aria-label="System initialization"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            id="progressTrack"
+          >
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <footer class="boot-footer">
+          <span>UNAUTHORIZED ACCESS IS RECORDED</span>
+          <span class="cursor">_</span>
+        </footer>
+
+        <button class="skip-button" id="skipBoot" type="button">
+          SKIP INITIALIZATION [ENTER]
+        </button>
+        <p class="fullscreen-hint">
+          Fullscreen starts after your first click or Enter key press.
+        </p>
+      </div>
+
+      <div class="transition-message" id="transitionMessage" hidden>
+        <p>CONNECTION ESTABLISHED</p>
+        <h1 data-text="YOU ARE NOT ALONE.">YOU ARE NOT ALONE.</h1>
+        <span>LOADING ARCHIVE NODE 07...</span>
+      </div>
+    </main>
+
+    <script>
+      import "../scripts/haunted-net";
+    </script>
+  </body>
 </html>
