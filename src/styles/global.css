@@ -1156,6 +1156,47 @@ input:focus-visible {
   }
 }
 
+@media (max-width: 768px), (pointer: coarse) {
+  .archive-desktop.glitch-active {
+    animation: none;
+  }
+
+  .archive-desktop.glitch-active::after {
+    position: absolute;
+    z-index: 30;
+    inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 16px,
+      rgb(179 55 62 / 24%) 17px,
+      transparent 19px,
+      rgb(147 190 151 / 18%) 20px,
+      transparent 23px
+    );
+    content: "";
+    opacity: 0;
+    pointer-events: none;
+    animation: archive-glitch-mobile 0.16s steps(2, end) 4;
+  }
+
+  @keyframes archive-glitch-mobile {
+    0%,
+    100% {
+      opacity: 0;
+    }
+
+    25%,
+    75% {
+      opacity: 0.8;
+    }
+
+    50% {
+      opacity: 0.25;
+    }
+  }
+}
+
 .horror-overlay {
   position: absolute;
   inset: 0;

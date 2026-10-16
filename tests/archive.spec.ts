@@ -166,6 +166,30 @@ test("mobile rotation fallback leaves the fullscreen exit control usable", async
   );
   await expect(page.locator(".rotate-hint")).toBeVisible();
 
+  const glitchStyles = await page
+    .locator(".archive-desktop")
+    .evaluate((desktop) => {
+      const originalTransform = getComputedStyle(desktop).transform;
+      desktop.classList.add("glitch-active");
+      const styles = getComputedStyle(desktop);
+      const overlayStyles = getComputedStyle(desktop, "::after");
+      return {
+        desktopAnimation: styles.animationName,
+        desktopFilter: styles.filter,
+        desktopTransformUnchanged: styles.transform === originalTransform,
+        overlayAnimation: overlayStyles.animationName,
+      };
+    });
+  expect(glitchStyles).toEqual({
+    desktopAnimation: "none",
+    desktopFilter: "none",
+    desktopTransformUnchanged: true,
+    overlayAnimation: "archive-glitch-mobile",
+  });
+  await page.locator(".archive-desktop").evaluate((desktop) => {
+    desktop.classList.remove("glitch-active");
+  });
+
   await page.locator("#fullscreenToggle").click();
   await expect(page.locator("#fullscreenToggle")).toHaveText("⛶ FULLSCREEN");
   await expect(page.locator(".rotate-hint")).toBeHidden();
